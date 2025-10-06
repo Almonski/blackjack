@@ -1,7 +1,5 @@
 import random
 from Card import Card
-# !!! UPDATE for Card later !!!
-
 # Klassen Deck representerar en klassisk kortlek med 52 kort, ska hantera
 # skapandet av kortleken, blandning av kortleken och utdelning av kort
 
@@ -13,17 +11,19 @@ class Deck:
     
     def create_deck(self):
         # skapar alla 52 kort genom att loopa genom valörer
-        # och färger och sen lägger in dem i en variabel "deck"
-        pass
-    # !!! ADD LATER !!!
+        # och färger och sen lägger in dem i en variabel "deck"        
+        for suit in Card.suit:
+            for rank in Card.ranks:
+                card = Card(suit, rank)
+                self.deck.append(card)
 
     def shuffle(self):
         random.shuffle(self.deck)
 
     def draw_card(self):
-        # tar bort "oversta kortet i en kortlek med hjälp av "pop"
+        # tar bort översta kortet i en kortlek med hjälp av "pop"
         if self.deck:
-            return self.deck.pop(0)
+            return self.deck.pop(-1)
         else:
             return None
 
