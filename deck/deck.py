@@ -18,6 +18,7 @@ class Deck:
                 self.deck.append(card)
 
     def shuffle(self):
+        # blandar kortlek
         random.shuffle(self.deck)
 
     def draw_card(self):
@@ -35,17 +36,3 @@ class Deck:
         # skapar en ny kortlek, tömmer, återskapar och blandar
         self.create_deck()
         self.shuffle()
-
-if __name__ == "__main__":
-    #testning
-    pass
-    # !!! UPDATE LATER TO ADD TEST CODE !!!
-
-    # Deck testing
-    # deck = Deck()
-    # deck.create_deck()
-    # deck.shuffle()
-    # print(deck.draw_card())
-    # deck.remaining_cards()
-    # deck.reset_deck()
-    # print(self.deck)
