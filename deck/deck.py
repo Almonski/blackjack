@@ -1,5 +1,5 @@
 import random
-from Card import Card
+from card.card import Card
 # Klassen Deck representerar en klassisk kortlek med 52 kort, ska hantera
 # skapandet av kortleken, blandning av kortleken och utdelning av kort
 
