@@ -175,7 +175,7 @@ def play_loop():
 
         dealer_value = dealer.get_value()
         player_value = player.get_value()
-        print(f"Final scores: \nYou: {player_value}  \nnDealer: {dealer_value}")
+        print(f"Final scores: \nYou: {player_value}  \nDealer: {dealer_value}")
 
         if player_value > dealer_value:
             show_message("\nYou win!")
