@@ -37,22 +37,3 @@ class Deck:
         self.deck = []
         self.create_deck()
         self.shuffle()
-
-if __name__ == "__main__":
-    import random
-    from card.card import Card
-    print("Testing: create deck")
-    deck = Deck()
-    print(f"Created a deck with {deck.remaining_cards()} cards.")
-
-    print("Testing: drawing cards")
-    for _ in range(5):
-        draw_card()
-    print(f"Drew card: {card.rank} of {card.suit}")    
-
-    print("TESTING: CHECK HOW MANY CARDS REMAINING")
-    print(f"There are {deck.remaining_cards()} cards remaining.")
-
-    print("TESTING: AFTER RESET, HOW MANY CARDS IN DECK?")
-    deck.reset_deck()
-    print(f"There are {deck.remaining_cards()} cards remaining.")
