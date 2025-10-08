@@ -36,7 +36,6 @@ class Hand:
     def show_hand(self, hide_card=False):
         #Visar dealerns kort, om man sätter till true döljs dealerns först kort
         print(f"\n{self.name}'s hand: ")
-
         #Loopar genom alla kort och döljer första kortet
         card_number = 0
         for card in self.cards:
@@ -44,7 +43,7 @@ class Hand:
                 print(" [Hidden card]")
             else:
                 print(f" {card}")
-                card_number += 1
+            card_number += 1
 
         #Om vi inte döljer första kortet printar vi ut värdet av handen
         if hide_card == False:
