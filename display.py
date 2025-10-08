@@ -90,12 +90,15 @@ def play_loop():
         #player.hand.show_hand(hide_card=False)
         #dealer.show_hand(hide_card=True)
         
-        show_message("Round played!")
 
         # För testsyfte förlorar spelaren automatiskt insatsen
         player.lose_bet()
         
         if player.is_blackjack():
+            #Om spelaren har blackjack, visar dealern också sina kort
+            show_message("\nDealer reveals their: ")
+            dealer.show_hand(hide_card=False)
+
             if dealer.is_blackjack():
                 show_message("\nBoth player and dealer have Blackjack! It's a push!")
                 player.return_bet()
@@ -107,6 +110,8 @@ def play_loop():
                 continue  # rundan avslutas
 
         if dealer.is_blackjack():
+            show_message("\nDealer reveals their hand: ")
+            dealer.show_hand(hide_card=False)
             show_message("\nDealer has Blackjack! You lose 😔")
             player.lose_bet()
             show_winner(dealer.name)
