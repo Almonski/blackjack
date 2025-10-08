@@ -32,6 +32,9 @@ class Player():
         self.hand.add_card(card)
 
     def reset_hand(self):
+        for card in self.hand.cards:
+            print(f"Removing {card} from hand...")
+
         self.hand = Hand()
         self.bet = 0
 
