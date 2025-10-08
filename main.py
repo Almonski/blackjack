@@ -4,5 +4,5 @@ from hand.hand import Hand
 from player.player import Player
 import display
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     display.play_loop()
