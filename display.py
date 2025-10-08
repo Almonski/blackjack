@@ -67,7 +67,23 @@ def play_loop():
             show_message("Round canceled")  # Meddelar att rundan avbryts
             player.return_bet()  # Ger tillbaka insatsen till spelaren
             continue  # Startar om loopen utan att spela rundan
+        # Skapa en ny kortlek varje runda
+        deck = Deck()
 
+        # Töm tidigare händer
+        player.clear_hand()
+        dealer.clear_hand()
+
+        # Dela ut startkorten
+        player.hit(deck.draw_card())
+        dealer.add_card(deck.draw_card())
+        player.hit(deck.draw_card())
+        dealer.add_card(deck.draw_card())
+
+        # Visa startkorten
+        player.show_hand(hide_card=False)
+        dealer.show_hand(hide_card=True)
+        
         # Här skulle själva blackjack-rundan spelas (men det saknas i koden ännu)
         # Lägg till kod för att dela ut kort här
         # Efter man delat ut kort till spelare och dealer visar man spelarensk kort och gömmer dealerns första kort
@@ -78,6 +94,45 @@ def play_loop():
 
         # För testsyfte förlorar spelaren automatiskt insatsen
         player.lose_bet()
+        
+        if player.is_blackjack():
+            if dealer.is_blackjack():
+                show_message("\nBoth player and dealer have Blackjack! It's a push!")
+                player.return_bet()
+                continue  # rundan avslutas
+            else:
+                show_message("\nBLACKJACK! You win! 🎉")
+                player.blackjack_win()
+                show_winner(player.name)
+                continue  # rundan avslutas
+
+        if dealer.is_blackjack():
+            show_message("\nDealer has Blackjack! You lose 😔")
+            player.lose_bet()
+            show_winner(dealer.name)
+            continue
+        while True:
+            choice = input("\nDo you want to 'hit' or 'stand'?\n> ").lower()
+
+            if choice == "hit":
+                # Spelaren får ett kort till
+                player.hit(deck.draw_card())
+                player.show_hand()
+
+                # Kolla om spelaren gått över 21
+                if player.is_over21():
+                    show_message("\nBUST! You went over 21 😭")
+                    player.lose_bet()
+                    show_winner("Dealer")
+                    break  # rundan slut
+                continue  # låt spelaren välja igen
+
+            elif choice == "stand":
+                show_message("\nYou chose to stand.")
+                break  # avsluta spelarens tur
+
+            else:
+                show_message("Invalid choice, type 'hit' or 'stand'.") 
 
     # När spelaren har 0 pengar kvar avslutas spelet
     show_message("Game over!")
