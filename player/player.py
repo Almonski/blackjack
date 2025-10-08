@@ -6,7 +6,7 @@ class Player():
         self.name = name
         self.balance = balance
         self.bet = 0
-        self.hand = Hand()
+        self.hand = Hand(name)
 
     def place_bet(self, amount: int):    
         if amount > self.balance:
