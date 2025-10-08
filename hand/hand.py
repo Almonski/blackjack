@@ -38,9 +38,9 @@ class Hand:
         print(f"\n{self.name}'s hand: ")
 
         #Loopar genom alla kort och döljer första kortet
-        card.number = 0
+        card_number = 0
         for card in self.cards:
-            if hide_card and card.number == 0:
+            if hide_card and card_number == 0:
                 print(" [Hidden card]")
             else:
                 print(f" {card}")
