@@ -92,7 +92,7 @@ def play_loop():
         
 
         # För testsyfte förlorar spelaren automatiskt insatsen
-        player.lose_bet()
+        #player.lose_bet()
         
         if player.is_blackjack():
             #Om spelaren har blackjack, visar dealern också sina kort
@@ -130,7 +130,10 @@ def play_loop():
                     player.lose_bet()
                     show_winner("Dealer")
                     break  # rundan slut
-                continue  # låt spelaren välja igen
+                
+                if player.get_value() == 21:
+                    show_message("\n21! You automatically stand.")
+                    break
 
             elif choice == "stand":
                 show_message("\nYou chose to stand.")
@@ -138,6 +141,45 @@ def play_loop():
 
             else:
                 show_message("Invalid choice, type 'hit' or 'stand'.") 
+        
+        if player.is_over21():
+            continue
+        
+        #Dealerns tur
+        show_message("\nDealer reveals their hand")
+        dealer.show_hand(hide_card=False)
 
+        while dealer.get_value() < 17:
+            show_message("\nDealer decides to hit")
+            dealer.add_card(deck.draw_card())
+            dealer.show_hand(hide_card=False)
+
+        if dealer.is_over21():
+            show_message("\nDealer BUST! You win! 🎉")
+            player.win_bet()
+            show_winner(player.name)
+            continue
+
+        if dealer.get_value() >= 17:
+            show_message("\nDealer decides to stand")
+
+        dealer_value = dealer.get_value()
+        player_value = player.get_value()
+        print(f"Final scores: \nYou: {player_value}  \nnDealer: {dealer_value}")
+
+        if player_value > dealer_value:
+            show_message("\nYou win!")
+            player.win_bet()
+            show_winner(player.name)
+        elif player_value < dealer_value:
+            show_message("\nDealer wins!")
+            player.lose_bet()
+            show_winner(dealer.name)
+        else:
+            show_message("\nIt's a draw!")
+            player.return_bet()
+            
+
+            
     # När spelaren har 0 pengar kvar avslutas spelet
     show_message("Game over!")
