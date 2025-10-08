@@ -38,17 +38,21 @@ class Hand:
         print(f"\n{self.name}'s hand: ")
         #Loopar genom alla kort och döljer första kortet
         card_number = 0
+        visible_value = 0
         for card in self.cards:
             if hide_card and card_number == 0:
                 print(" [Hidden card]")
             else:
                 print(f" {card}")
+                visible_value += card.value
             card_number += 1
 
         #Om vi inte döljer första kortet printar vi ut värdet av handen
         if hide_card == False:
             total = self.get_value()
             print(f"Total value: {total}")
+        else: 
+            print(f"Value: {visible_value}")
 
 
     def clear_hand(self):
