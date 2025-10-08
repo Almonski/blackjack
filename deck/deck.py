@@ -34,5 +34,6 @@ class Deck:
     
     def reset_deck(self):
         # skapar en ny kortlek, tömmer, återskapar och blandar
+        self.deck = []
         self.create_deck()
         self.shuffle()
