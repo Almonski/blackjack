@@ -23,7 +23,7 @@ class Hand:
         while aces > 0 and value > 21:
             value -= 10
             aces -= 1
-            return value
+        return value
         
     def is_blackjack(self):
     #Kollar om handens värde är över 21
@@ -32,6 +32,25 @@ class Hand:
     def is_over21(self):
         #Kollar om värdet av handen > 21 == du förlorar
         return self.get_value() > 21
+    
+    def show_hand(self, hide_card=False):
+        #Visar dealerns kort, om man sätter till true döljs dealerns först kort
+        print(f"\n{self.name}'s hand: ")
+
+        #Loopar genom alla kort och döljer första kortet
+        card.number = 0
+        for card in self.cards:
+            if hide_card and card.number == 0:
+                print(" [Hidden card]")
+            else:
+                print(f" {card}")
+                card_number += 1
+
+        #Om vi inte döljer första kortet printar vi ut värdet av handen
+        if hide_card == False:
+            total = self.get_value()
+            print(f"Total value: {total}")
+
 
     def clear_hand(self):
         #Tömmer handen på kort

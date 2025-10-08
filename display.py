@@ -34,6 +34,7 @@ def show_winner(name):
 def play_loop():
     show_title()  # Visar spelets titel
     player = Player(name="Player", balance=1000)  # Skapar en spelare med ett startkapital på 1000
+    dealer = Hand("Dealer") # Skapar en dealer
 
     # Spelet fortsätter så länge spelaren har pengar kvar
     while player.balance > 0:
@@ -68,6 +69,11 @@ def play_loop():
             continue  # Startar om loopen utan att spela rundan
 
         # Här skulle själva blackjack-rundan spelas (men det saknas i koden ännu)
+        # Lägg till kod för att dela ut kort här
+        # Efter man delat ut kort till spelare och dealer visar man spelarensk kort och gömmer dealerns första kort
+        #player.hand.show_hand(hide_card=False)
+        #dealer.show_hand(hide_card=True)
+        
         show_message("Round played!")
 
         # För testsyfte förlorar spelaren automatiskt insatsen
