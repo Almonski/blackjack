@@ -13,8 +13,18 @@ def show_menu():
     return input("Type 'play' to start or 'exit' to end:\n> ").lower()
 
 # Funktion som frågar spelaren hur mycket pengar de vill satsa
-def ask_bet():
-    return int(input("How much money do you wanna bet?\n> "))
+def ask_bet(player: Player):
+    while True:
+        try:
+            amount = int(input("How much money do you wanna bet?\n> "))
+            player.place_bet(amount)
+            return amount
+        except ValueError as e:
+            # check type of ValueError
+            if str(e) == "Too broke":
+                print("🛑 You don't have enough money. Try a smaller bet.")
+            else:
+                print("🛑 Invalid input. Please enter a number.")
 
 # Funktion som låter spelaren bekräfta eller ändra sin insats
 def confirm_bet():
@@ -52,7 +62,7 @@ def play_loop():
             continue  # Går tillbaka till början av loopen
 
         # Frågar hur mycket spelaren vill satsa
-        bet = ask_bet()
+        bet = ask_bet(player)
 
         # Kollar om spelaren försöker satsa mer än de har
         if bet > player.balance:
