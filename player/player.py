@@ -1,12 +1,13 @@
 from hand.hand import Hand
 from card.card import Card
 
-class Player():
+class Player(Hand):
     def __init__(self, name: str, balance: int = 1000):
+        super().__init__(name)
         self.name = name
         self.balance = balance
         self.bet = 0
-        self.hand = Hand(name)
+        
 
     def place_bet(self, amount: int):    
         if amount > self.balance:
@@ -29,13 +30,13 @@ class Player():
         return self.balance  
 
     def hit(self, card):
-        self.hand.add_card(card)
+        self.add_card(card)
 
     def reset_hand(self):
-        for card in self.hand.cards:
+        for card in self.cards:
             print(f"Removing {card} from hand...")
 
-        self.hand = Hand()
+        self.clear_hand()
         self.bet = 0
 
     def return_bet(self):
