@@ -65,7 +65,7 @@ def play_loop():
         bet = ask_bet(player)
 
         # Kollar om spelaren försöker satsa mer än de har
-        if bet > player.balance:
+        if bet > player.balance: 
             show_message("Not enough money!")  # Meddelar att spelaren inte har tillräckligt
             continue  # Går tillbaka till början av loopen
 
@@ -106,7 +106,7 @@ def play_loop():
         
         if player.is_blackjack():
             #Om spelaren har blackjack, visar dealern också sina kort
-            show_message("\nDealer reveals their: ")
+            show_message("\nDealer reveals their hand:")
             dealer.show_hand(hide_card=False)
 
             if dealer.is_blackjack():
@@ -120,7 +120,7 @@ def play_loop():
                 continue  # rundan avslutas
 
         if dealer.is_blackjack():
-            show_message("\nDealer reveals their hand: ")
+            show_message("\nDealer reveals their hand:")
             dealer.show_hand(hide_card=False)
             show_message("\nDealer has Blackjack! You lose 😔")
             player.lose_bet()
@@ -175,7 +175,7 @@ def play_loop():
 
         dealer_value = dealer.get_value()
         player_value = player.get_value()
-        print(f"Final scores: \nYou: {player_value}  \nDealer: {dealer_value}")
+        print(f"\nFinal scores: \nYou: {player_value}  \nDealer: {dealer_value}")
 
         if player_value > dealer_value:
             show_message("\nYou win!")
@@ -186,10 +186,10 @@ def play_loop():
             player.lose_bet()
             show_winner(dealer.name)
         else:
-            show_message("\nIt's a draw!")
+            show_message("\nIt's a push!")
             player.return_bet()
             
 
             
     # När spelaren har 0 pengar kvar avslutas spelet
-    show_message("Game over!")
+    show_message("Game over! You're broke.")
