@@ -20,7 +20,7 @@ class Player(Hand):
         self.bet = 0
 
     def blackjack_win(self):
-        self.balance += self.bet * 1.5
+        self.balance += int(self.bet * 1.5)
         self.bet = 0
 
     def lose_bet(self):
