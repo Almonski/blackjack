@@ -10,15 +10,15 @@ class Deck:
         self.shuffle()
     
     def create_deck(self):
-        # skapar alla 52 kort genom att loopa genom valörer
-        # och färger och sen lägger in dem i en variabel "deck"        
+        # skapar alla 52 kort genom att loopa genom färger och
+        # valörer och sen lägger in dem i den tom listvariabel "deck"        
         for suit in Card.suit:
             for rank in Card.ranks:
                 card = Card(suit, rank)
                 self.deck.append(card)
 
     def shuffle(self):
-        # blandar kortlek
+        # blandar kortlek ("deck") listan
         random.shuffle(self.deck)
 
     def draw_card(self):
@@ -33,7 +33,7 @@ class Deck:
         return len(self.deck)
     
     def reset_deck(self):
-        # skapar en ny kortlek, tömmer, återskapar och blandar
+        # tömmer kortleklistan, återskapar kortleken och blandar den
         self.deck = []
         self.create_deck()
         self.shuffle()
