@@ -1,4 +1,4 @@
-
+import time
 class Hand:
 
     def __init__(self, name):
@@ -33,17 +33,25 @@ class Hand:
         #Kollar om värdet av handen > 21 == du förlorar
         return self.get_value() > 21
     
-    def show_hand(self, hide_card=False):
+    def show_hand(self, hide_card=False, delay=False):
         #Visar dealerns kort, om man sätter till true döljs dealerns först kort
         print(f"\n{self.name}'s hand: ")
-        #Loopar genom alla kort och döljer första kortet
+        
+        if delay: 
+            time.sleep(0.5)
+
         card_number = 0
         visible_value = 0
+        #Loopar genom alla kort och döljer första kortet
         for card in self.cards:
             if hide_card and card_number == 0:
                 print(" [Hidden card]")
+                if delay:
+                    time.sleep(0.5)
             else:
                 print(f" {card}")
+                if delay:
+                    time.sleep(0.5)
                 visible_value += card.value
             card_number += 1
 
@@ -51,8 +59,12 @@ class Hand:
         if hide_card == False:
             total = self.get_value()
             print(f"Total value: {total}")
+            if delay:
+                    time.sleep(0.5)
         else: 
             print(f"Value: {visible_value}")
+            if delay:
+                    time.sleep(0.5)
 
 
     def clear_hand(self):

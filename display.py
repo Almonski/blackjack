@@ -1,3 +1,5 @@
+#Import time för pauser mellan utskrifter
+import time
 # Importerar klasserna Card, Deck, Hand och Player från deras respektive mappar
 from card.card import Card
 from deck.deck import Deck
@@ -31,12 +33,14 @@ def confirm_bet():
     return input("'Deal' or 'Change' bet?\n> ").lower()
 
 # Funktion som visar ett meddelande på skärmen
-def show_message(msg):
+def show_message(msg, delay=1.0):
     print(msg)
+    time.sleep(delay)
 
 # Funktion som visar vinnaren av rundan
 def show_winner(name):
     print(f"WINNER: {name}\n")
+    time.sleep(1.5)
 
 # ----------------------------------------------------
 # HUVUDLOOP FÖR SPELET
@@ -53,12 +57,12 @@ def play_loop():
 
         # Om spelaren väljer att avsluta spelet
         if choice == "exit":
-            show_message("Thanks for playing!")
+            show_message("Thanks for playing!", delay=0.5)
             break  # Avslutar while-loopen
 
         # Om spelaren inte skriver "play" eller "exit"
         if choice != "play":
-            show_message("Invalid choice, try again.")  # Felmeddelande
+            show_message("Invalid choice, try again.", delay=0.5)  # Felmeddelande
             continue  # Går tillbaka till början av loopen
 
         # Frågar hur mycket spelaren vill satsa
@@ -66,40 +70,33 @@ def play_loop():
 
         # Frågar om spelaren vill "deal" (spela rundan) eller "change" (ändra insats)
         if confirm_bet() != "deal":
-            show_message("Round canceled")  # Meddelar att rundan avbryts
+            show_message("Round canceled", delay=0.5)  # Meddelar att rundan avbryts
             player.return_bet()  # Ger tillbaka insatsen till spelaren
             continue  # Startar om loopen utan att spela rundan
         # Skapa en ny kortlek varje runda
+        show_message("\nDealer shuffles the deck", delay=1.0)
         deck = Deck()
 
         # Töm tidigare händer
         player.clear_hand()
         dealer.clear_hand()
-
+        
         # Dela ut startkorten
+        show_message("Dealing cards...", delay=1.0)
+
         player.hit(deck.draw_card())
         dealer.add_card(deck.draw_card())
         player.hit(deck.draw_card())
         dealer.add_card(deck.draw_card())
 
         # Visa startkorten
-        player.show_hand(hide_card=False)
-        dealer.show_hand(hide_card=True)
-        
-        # Här skulle själva blackjack-rundan spelas (men det saknas i koden ännu)
-        # Lägg till kod för att dela ut kort här
-        # Efter man delat ut kort till spelare och dealer visar man spelarensk kort och gömmer dealerns första kort
-        #player.hand.show_hand(hide_card=False)
-        #dealer.show_hand(hide_card=True)
-        
-
-        # För testsyfte förlorar spelaren automatiskt insatsen
-        #player.lose_bet()
+        player.show_hand(hide_card=False, delay=True)
+        dealer.show_hand(hide_card=True, delay=True)
         
         if player.is_blackjack():
             #Om spelaren har blackjack, visar dealern också sina kort
             show_message("\nDealer reveals their hand:")
-            dealer.show_hand(hide_card=False)
+            dealer.show_hand(hide_card=False, delay=True)
 
             if dealer.is_blackjack():
                 show_message("\nBoth player and dealer have Blackjack! It's a push!")
@@ -111,9 +108,10 @@ def play_loop():
                 show_winner(player.name)
                 continue  # rundan avslutas
 
+
         if dealer.is_blackjack():
             show_message("\nDealer reveals their hand:")
-            dealer.show_hand(hide_card=False)
+            dealer.show_hand(hide_card=False, delay=True)
             show_message("\nDealer has Blackjack! You lose 😔")
             player.lose_bet()
             show_winner(dealer.name)
@@ -149,12 +147,12 @@ def play_loop():
         
         #Dealerns tur
         show_message("\nDealer reveals their hand")
-        dealer.show_hand(hide_card=False)
+        dealer.show_hand(hide_card=False, delay=True)
 
         while dealer.get_value() < 17:
             show_message("\nDealer decides to hit")
             dealer.add_card(deck.draw_card())
-            dealer.show_hand(hide_card=False)
+            dealer.show_hand(hide_card=False, delay=True)
 
         if dealer.is_over21():
             show_message("\nDealer BUST! You win! 🎉")
@@ -170,15 +168,15 @@ def play_loop():
         print(f"\nFinal scores: \nYou: {player_value}  \nDealer: {dealer_value}")
 
         if player_value > dealer_value:
-            show_message("\nYou win!")
+            show_message("\nYou win!", delay=2)
             player.win_bet()
             show_winner(player.name)
         elif player_value < dealer_value:
-            show_message("\nDealer wins!")
+            show_message("\nDealer wins!", delay=1.5)
             player.lose_bet()
             show_winner(dealer.name)
         else:
-            show_message("\nIt's a push!")
+            show_message("\nIt's a push!", delay=1.5)
             player.return_bet()
             
 
