@@ -13,17 +13,19 @@ class Player(Hand):
         if amount > self.balance:
             raise ValueError("Too broke")
         self.bet = amount
-        self.balance -= amount
+        if amount <= 0:
+            raise ValueError("Can't place a negative bet")
 
     def win_bet(self):
-        self.balance += self.bet * 2 
+        self.balance += self.bet
         self.bet = 0
 
     def blackjack_win(self):
-        self.balance += self.bet * 2.5
+        self.balance += self.bet * 1.5
         self.bet = 0
 
     def lose_bet(self):
+        self.bet -= self.balance
         self.bet = 0
 
     def show_balance(self):
@@ -40,5 +42,4 @@ class Player(Hand):
         self.bet = 0
 
     def return_bet(self):
-        self.balance += self.bet
         self.bet = 0
