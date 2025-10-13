@@ -10,21 +10,22 @@ To win, the player’s hand must have a higher total than the dealer's total wit
 
 ## Requirements
 - Python 3.x
+- colorama (for colors)
 - pytest (for running tests)
 
 ## Instructions for installation and running
 
 1. Install [Python 3](https://www.python.org/downloads/) if it is not already installed.
-2. Download or clone this project folder to your computer.
-3. Navigate to the project folder in a terminal (e.g. Hyper, Git Bash, etc.).
-4. Start the game by running `python main.py`
+2. Install requirements `pip install -r requirements.txt`
+3. Download or clone this project folder to your computer.
+4. Navigate to the project folder in a terminal (e.g. Hyper, Git Bash, etc.).
+5. Start the game by running `python main.py`
 
 ## Instructions for running the test files
 
-1. Install pytest: `pip install pytest`
-2. Navigate to the project folder in a terminal (e.g. Hyper, Git Bash, etc.).
-3. Run all tests with `pytest`
-4. To run a single test, for example `test_card.py`: `pytest test_card.py`
+1. Navigate to the project folder in a terminal (e.g. Hyper, Git Bash, etc.).
+2. Run all tests with `pytest`
+3. To run a single test, for example `test_card.py`: `pytest test_card.py`
 
 ## Who worked on which file
 
@@ -32,4 +33,4 @@ To win, the player’s hand must have a higher total than the dealer's total wit
 * Victoria - deck.py, test_deck.py
 * Ali - player.py, test_player.py
 * Filip - hand.py
-* Group - main.py, display.py, Colorama
+* Group - main.py, display.py, colorama integration
