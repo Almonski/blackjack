@@ -5,6 +5,9 @@ from card.card import Card
 from deck.deck import Deck
 from hand.hand import Hand
 from player.player import Player
+from colorama import Fore, Back, Style, init
+
+init(autoreset = True)
 
 # Funktion som visar en välkomsttext
 def show_title():
@@ -47,10 +50,11 @@ def show_winner(name):
 # ----------------------------------------------------
 def play_loop():
     show_title()  # Visar spelets titel
-    player = Player(name="Player", balance=1000)  # Skapar en spelare med ett startkapital på 1000
-    dealer = Hand("Dealer") # Skapar en dealer
+    player = Player(name=f"{Fore.GREEN}Player{Style.RESET_ALL}", balance=1000)  # Skapar en spelare med ett startkapital på 1000
+    dealer = Hand(name=f"{Fore.RED}Dealer{Style.RESET_ALL}") # Skapar en dealer och ändrar färg
 
     # Spelet fortsätter så länge spelaren har pengar kvar
+    game_over = False
     while player.balance > 0:
         print(f"\nYou have {player.balance} money.")  # Visar hur mycket pengar spelaren har kvar
         choice = show_menu()  # Frågar om spelaren vill spela eller avsluta
@@ -58,6 +62,7 @@ def play_loop():
         # Om spelaren väljer att avsluta spelet
         if choice == "exit":
             show_message("Thanks for playing!", delay=0.5)
+            game_over = True
             break  # Avslutar while-loopen
 
         # Om spelaren inte skriver "play" eller "exit"
@@ -182,4 +187,5 @@ def play_loop():
 
             
     # När spelaren har 0 pengar kvar avslutas spelet
-    show_message("Game over! You're broke.")
+    if not game_over:
+        show_message("Game over! You're broke.")
