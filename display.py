@@ -126,22 +126,24 @@ def play_loop():
 
             if choice == "hit":
                 # Spelaren får ett kort till
+                show_message("\nDrawing a card...", delay=1.0)
                 player.hit(deck.draw_card())
                 player.show_hand(delay=True)
 
                 # Kolla om spelaren gått över 21
                 if player.is_over21():
-                    show_message("\nBUST! You went over 21 😭")
+                    time.sleep(1.0)
+                    show_message("\nBUST! You went over 21 😭", delay=1.0)
                     player.lose_bet()
                     show_winner(dealer.name)
                     break  # rundan slut
                 
                 if player.get_value() == 21:
-                    show_message("\n21! You automatically stand.")
+                    show_message("\n21! You automatically stand.", delay=1.0)
                     break
 
             elif choice == "stand":
-                show_message("\nYou chose to stand.")
+                show_message("\nYou chose to stand.", delay=1.0)
                 break  # avsluta spelarens tur
 
             else:
