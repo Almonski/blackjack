@@ -12,10 +12,9 @@ class Player(Hand):
     def place_bet(self, amount: int):    
         if amount > self.balance:
             raise ValueError("Too broke")
-        self.bet = amount
         if amount <= 0:
             raise ValueError("Can't place a negative bet")
-
+        self.bet = amount
     def win_bet(self):
         self.balance += self.bet
         self.bet = 0
