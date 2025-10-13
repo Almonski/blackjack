@@ -32,4 +32,4 @@ To win, the player’s hand must have a higher total than the dealer's total wit
 * Victoria - deck.py, test_deck.py
 * Ali - player.py, test_player.py
 * Filip - hand.py
-* Group - main.py, display.py
+* Group - main.py, display.py, Colorama
