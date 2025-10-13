@@ -64,14 +64,6 @@ def play_loop():
         # Frågar hur mycket spelaren vill satsa
         bet = ask_bet(player)
 
-        # Kollar om spelaren försöker satsa mer än de har
-        if bet > player.balance: 
-            show_message("Not enough money!")  # Meddelar att spelaren inte har tillräckligt
-            continue  # Går tillbaka till början av loopen
-
-        # Spelaren placerar sin insats
-        player.place_bet(bet)
-
         # Frågar om spelaren vill "deal" (spela rundan) eller "change" (ändra insats)
         if confirm_bet() != "deal":
             show_message("Round canceled")  # Meddelar att rundan avbryts

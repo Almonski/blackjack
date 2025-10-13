@@ -24,7 +24,7 @@ class Player(Hand):
         self.bet = 0
 
     def lose_bet(self):
-        self.bet -= self.balance
+        self.balance -= self.bet
         self.bet = 0
 
     def show_balance(self):
