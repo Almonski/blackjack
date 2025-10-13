@@ -127,13 +127,13 @@ def play_loop():
             if choice == "hit":
                 # Spelaren får ett kort till
                 player.hit(deck.draw_card())
-                player.show_hand()
+                player.show_hand(delay=True)
 
                 # Kolla om spelaren gått över 21
                 if player.is_over21():
                     show_message("\nBUST! You went over 21 😭")
                     player.lose_bet()
-                    show_winner("Dealer")
+                    show_winner(dealer.name)
                     break  # rundan slut
                 
                 if player.get_value() == 21:
