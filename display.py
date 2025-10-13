@@ -47,6 +47,7 @@ def play_loop():
     dealer = Hand("Dealer") # Skapar en dealer
 
     # Spelet fortsätter så länge spelaren har pengar kvar
+    game_over = False
     while player.balance > 0:
         print(f"\nYou have {player.balance} money.")  # Visar hur mycket pengar spelaren har kvar
         choice = show_menu()  # Frågar om spelaren vill spela eller avsluta
@@ -54,6 +55,7 @@ def play_loop():
         # Om spelaren väljer att avsluta spelet
         if choice == "exit":
             show_message("Thanks for playing!")
+            game_over = True
             break  # Avslutar while-loopen
 
         # Om spelaren inte skriver "play" eller "exit"
@@ -184,4 +186,5 @@ def play_loop():
 
             
     # När spelaren har 0 pengar kvar avslutas spelet
-    show_message("Game over! You're broke.")
+    if not game_over:
+        show_message("Game over! You're broke.")
