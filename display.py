@@ -3,6 +3,9 @@ from card.card import Card
 from deck.deck import Deck
 from hand.hand import Hand
 from player.player import Player
+from colorama import Fore, Back, Style, init
+
+init(autoreset = True)
 
 # Funktion som visar en välkomsttext
 def show_title():
@@ -43,8 +46,8 @@ def show_winner(name):
 # ----------------------------------------------------
 def play_loop():
     show_title()  # Visar spelets titel
-    player = Player(name="Player", balance=1000)  # Skapar en spelare med ett startkapital på 1000
-    dealer = Hand("Dealer") # Skapar en dealer
+    player = Player(name=f"{Fore.GREEN}Player{Style.RESET_ALL}", balance=1000)  # Skapar en spelare med ett startkapital på 1000
+    dealer = Hand(name=f"{Fore.RED}Dealer{Style.RESET_ALL}") # Skapar en dealer och ändrar färg
 
     # Spelet fortsätter så länge spelaren har pengar kvar
     game_over = False
