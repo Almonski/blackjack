@@ -1,5 +1,6 @@
 #Import time för pauser mellan utskrifter
 import time
+import matplotlib.pyplot as plt
 # Importerar klasserna Card, Deck, Hand och Player från deras respektive mappar
 from card.card import Card
 from deck.deck import Deck
@@ -8,6 +9,40 @@ from player.player import Player
 from colorama import Fore, Back, Style, init
 
 init(autoreset = True)
+
+rounds = []
+balances = []
+wins = 0
+losses = 0
+round_number = 0
+
+def log_round(player, result):
+    global round_number, wins, losses
+    round_number += 1
+    rounds.append(round_number)
+    balances.append(player.balance)
+    if result == "win":
+        wins += 1
+    elif result == "lose":
+        losses += 1
+
+def show_stats():
+    plt.figure(figsize=(10,5))
+
+    # Linjediagram för balans
+    plt.subplot(1,2,1)
+    plt.plot(rounds, balances, marker='o', color='blue')
+    plt.title("Balance Over Time")
+    plt.xlabel("Round")
+    plt.ylabel("Balance")
+
+    # Stapeldiagram för vinster/förluster
+    plt.subplot(1,2,2)
+    plt.bar(["Wins", "Losses"], [wins, losses], color=["green","red"])
+    plt.title("Wins vs Losses")
+
+    plt.tight_layout()
+    plt.show()  # Grafen dyker upp i ett nytt fönster
 
 # Funktion som visar en välkomsttext
 def show_title():
@@ -44,12 +79,15 @@ def show_message(msg, delay=1.0):
 def show_winner(name):
     print(f"WINNER: {name}\n")
     time.sleep(1.5)
-
+    
 # ----------------------------------------------------
 # HUVUDLOOP FÖR SPELET
 # ----------------------------------------------------
 def play_loop():
     show_title()  # Visar spelets titel
+
+    round_number = 0
+
     player = Player(name=f"{Fore.GREEN}Player{Style.RESET_ALL}", balance=1000)  # Skapar en spelare med ett startkapital på 1000
     dealer = Hand(name=f"{Fore.RED}Dealer{Style.RESET_ALL}") # Skapar en dealer och ändrar färg
 
@@ -106,11 +144,13 @@ def play_loop():
             if dealer.is_blackjack():
                 show_message("\nBoth player and dealer have Blackjack! It's a push!")
                 player.return_bet()
+                log_round(player, "push")
                 continue  # rundan avslutas
             else:
                 show_message("\nBLACKJACK! You win! 🎉")
                 player.blackjack_win()
                 show_winner(player.name)
+                log_round(player, "win")
                 continue  # rundan avslutas
 
 
@@ -120,6 +160,7 @@ def play_loop():
             show_message("\nDealer has Blackjack! You lose 😔")
             player.lose_bet()
             show_winner(dealer.name)
+            log_round(player, "lose")
             continue
         while True:
             choice = input("\nDo you want to 'hit' or 'stand'?\n> ").lower()
@@ -173,21 +214,24 @@ def play_loop():
         dealer_value = dealer.get_value()
         player_value = player.get_value()
         print(f"\nFinal scores: \nYou: {player_value}  \nDealer: {dealer_value}")
-
+        
         if player_value > dealer_value:
             show_message("\nYou win!", delay=2)
             player.win_bet()
             show_winner(player.name)
+            log_round(player, "win")
         elif player_value < dealer_value:
             show_message("\nDealer wins!", delay=1.5)
             player.lose_bet()
             show_winner(dealer.name)
+            log_round(player, "lose")
         else:
             show_message("\nIt's a push!", delay=1.5)
             player.return_bet()
-            
+            log_round(player, "push")
 
-            
+
     # När spelaren har 0 pengar kvar avslutas spelet
     if not game_over:
         show_message("Game over! You're broke.")
+    show_stats()
