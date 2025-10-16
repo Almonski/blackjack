@@ -25,11 +25,11 @@ class Deck:
         # tar bort översta kortet i en kortlek med hjälp av "pop"
         if self.deck:
             return self.deck.pop(-1)
-        else:
-            return None
+        else: # om det finns inget kort kvar i kortleken (hypotetisk :)
+            return None 
 
     def remaining_cards(self):
-        # returnerar hur många kort som är krav i kortleken
+        # returnerar hur många kort som är kvar i kortleken
         return len(self.deck)
     
     def reset_deck(self):
