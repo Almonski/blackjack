@@ -94,6 +94,8 @@ def play_loop():
 
     player = Player(name=f"{Fore.GREEN}Player{Style.RESET_ALL}", balance=1000)  # Skapar en spelare med ett startkapital på 1000
     dealer = Hand(name=f"{Fore.RED}Dealer{Style.RESET_ALL}") # Skapar en dealer och ändrar färg
+    rounds.append(0)    # Round 0
+    balances.append(player.balance) # starting balance
 
     # Spelet fortsätter så länge spelaren har pengar kvar
     game_over = False
