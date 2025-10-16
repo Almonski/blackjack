@@ -33,7 +33,7 @@ class Deck:
         return len(self.deck)
     
     def reset_deck(self):
-        # tömmer kortleklistan, återskapar kortleken och blandar den
+        # tömmer kortleklistan, återskapar kortleken och blandar det 
         self.deck = []
         self.create_deck()
         self.shuffle()
