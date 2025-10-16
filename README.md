@@ -8,6 +8,8 @@ The player starts with 1000 credits and chooses a betting amount. The player is 
 
 To win, the player’s hand must have a higher total than the dealer's total without busting (being over 21) or if the dealer busts.
 
+Once the player chooses "exit" or goes broke, statistics of the game are shown which include the balance over the different rounds and the wins vs losses.
+
 ## Requirements
 - Python 3.x
 - colorama (for colors)
