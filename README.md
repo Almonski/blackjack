@@ -11,6 +11,7 @@ To win, the player’s hand must have a higher total than the dealer's total wit
 ## Requirements
 - Python 3.x
 - colorama (for colors)
+- matplotlib (for stats)
 - pytest (for running tests)
 
 ## Instructions for installation and running
@@ -33,4 +34,4 @@ To win, the player’s hand must have a higher total than the dealer's total wit
 * Victoria - deck.py, test_deck.py
 * Ali - player.py, test_player.py
 * Filip - hand.py
-* Group - main.py, display.py, colorama integration
+* Group - main.py, display.py, colorama and stats integration

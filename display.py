@@ -35,11 +35,15 @@ def show_stats():
     plt.title("Balance Over Time")
     plt.xlabel("Round")
     plt.ylabel("Balance")
+    plt.xticks(range(1, round_number + 1))
 
     # Stapeldiagram för vinster/förluster
     plt.subplot(1,2,2)
     plt.bar(["Wins", "Losses"], [wins, losses], color=["green","red"])
     plt.title("Wins vs Losses")
+   # Tvinga y-axeln att visa heltal
+    max_count = max(wins, losses)
+    plt.yticks(range(0, max_count + 2)) #+2 för att ge lite utrymme ovanpå
 
     plt.tight_layout()
     plt.show()  # Grafen dyker upp i ett nytt fönster
@@ -64,7 +68,7 @@ def ask_bet(player: Player):
             if str(e) == "Too broke":
                 print("🛑 You don't have enough money. Try a smaller bet.")
             else:
-                print("🛑 Invalid input. Please enter a number.")
+                print("🛑 Invalid input. Please enter a valid number.")
 
 # Funktion som låter spelaren bekräfta eller ändra sin insats
 def confirm_bet():
@@ -177,6 +181,7 @@ def play_loop():
                     show_message("\nBUST! You went over 21 😭", delay=1.0)
                     player.lose_bet()
                     show_winner(dealer.name)
+                    log_round(player, "lose")
                     break  # rundan slut
                 
                 if player.get_value() == 21:
@@ -206,6 +211,7 @@ def play_loop():
             show_message("\nDealer BUST! You win! 🎉")
             player.win_bet()
             show_winner(player.name)
+            log_round(player, "win")
             continue
 
         if dealer.get_value() >= 17:
