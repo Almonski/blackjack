@@ -35,5 +35,5 @@ Once the player chooses "exit" or goes broke, statistics of the game are shown w
 * Elvira - card.py, test_card.py
 * Victoria - deck.py, test_deck.py
 * Ali - player.py, test_player.py
-* Filip - hand.py
+* Filip - hand.py, test_hand.py
 * Group - main.py, display.py, colorama and stats integration
